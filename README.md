@@ -18,6 +18,10 @@ Interpreted XGBoost model - `script/interpret_models`
 
 `util/`
 
+### Shiny app
+
+`shiny/`
+
 ### Software
 
 R, 4.1.0 version, under IDE RStudio
