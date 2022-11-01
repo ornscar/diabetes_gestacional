@@ -5,12 +5,12 @@ ui <- navbarPage(
   # menu gráficos -----
   navbarMenu(
     "Gráficos", 
-    icon = icon("bar-chart-o"),
+    icon = icon("square-poll-horizontal"),
     # painel de interpretabilidade global -----
     tabPanel(
       "De interpretabilidade global", 
       fluidPage(
-        theme = shinythemes::shinytheme("sandstone"),
+        theme = shinythemes::shinytheme("united"),
         titlePanel("Interpretabilidade Global"),
         hr(),
         sidebarLayout(
@@ -22,13 +22,13 @@ ui <- navbarPage(
                                     "Gráfico de Dependência Parcial (PDP) - 2 variáveis" = "pdp2",
                                     "Gráfico da Esperança Condicional Individual (ICE)" = "ice",
                                     "Gráfico dos Efeitos Locais Acumulados (ALE)" = "ale",
-                                    "Importância da Covariável por Permutação" = "imp",
+                                    "Importância das Covariáveis por Permutação" = "imp",
                                     "Interação Total das Covariáveis" = "int",
                                     "Interação Bidimensional das Covariáveis" = "intbi",
                                     "Modelo Interpretável Substituto Global" = "sub"),
                         selected = "Gráfico de Dependência Parcial (PDP) - 1 variável",
                         multiple = FALSE),
-            tags$div(submitButton("Atualizar Método", icon = icon("triangle-bottom", lib = "glyphicon")), `align` = "center"),
+            tags$div(submitButton("Atualizar Método", icon = icon("arrows-rotate")), `align` = "center"),
             hr(),
             shiny::conditionalPanel(
               condition = "input.SelectMetGlobal != 'pdp2' & input.SelectMetGlobal != 'imp' & input.SelectMetGlobal != 'int' & input.SelectMetGlobal != 'sub'",
@@ -73,7 +73,7 @@ ui <- navbarPage(
                                                 selected = "imc_classe",
                                                 multiple = FALSE)),
             shiny::conditionalPanel(condition = "input.SelectMetGlobal == 'imp' | input.SelectMetGlobal == 'int' | input.SelectMetGlobal == 'sub'"),
-            tags$div(submitButton("Atualizar Filtro", icon = icon("refresh")), `align` = "center"),
+            tags$div(submitButton("Atualizar Filtro", icon = icon("arrows-rotate")), `align` = "center"),
           ),
           # tela de visualizacao 1 -----
           mainPanel(width = 6,
@@ -89,9 +89,10 @@ ui <- navbarPage(
     tabPanel(
       "De interpretabilidade individual",
       fluidPage(
-        theme = shinythemes::shinytheme("sandstone"),
+        theme = shinythemes::shinytheme("united"),
         titlePanel("Interpretabilidade Individual"),
         hr(),
+        p(em(HTML(paste("Observação: é sugerido diminuir a tela do computador e depois maximizá-la para", "aparecer os widgets com os valores das variáveis quantitativas.", sep = "<br/>")))),
         sidebarLayout(
           sidebarPanel(
             width = 5,
@@ -161,7 +162,7 @@ ui <- navbarPage(
                                     label = tags$b("Hipertensão:"), 
                                     status = "success"))
             ),
-            tags$div(submitButton("Atualizar Filtro", icon = icon("refresh")), `align` = "center"),
+            tags$div(submitButton("Atualizar Filtro", icon = icon("arrows-rotate")), `align` = "center"),
           ),
           # tela de visualizacao 2 -----
           mainPanel(width = 7,
@@ -178,7 +179,7 @@ ui <- navbarPage(
   navbarMenu(
     "Como Interpretar", icon = icon("question-sign", lib = "glyphicon"),
     tabPanel("Gráfico de Dependência Parcial (PDP)", includeMarkdown("pdp.md")), 
-    tabPanel("Gráfico da Esperança Individual Condicional (ICE)", includeMarkdown("ice.md")),
+    tabPanel("Gráfico da Esperança Condicional Individual (ICE)", includeMarkdown("ice.md")),
     tabPanel("Gráfico dos Efeitos Locais Acumulados (ALE)", includeMarkdown("ale.md")),
     tabPanel("Importância da Covariável por Permutação", includeMarkdown("imp.md")),
     tabPanel("Interação das Covariáveis", includeMarkdown("int.md")),
@@ -188,7 +189,7 @@ ui <- navbarPage(
   ),
   # menu sobre -----
   tabPanel(
-    "Sobre", icon = icon("comment", lib = "glyphicon"),
+    "Sobre", icon = icon("info-sign", lib = "glyphicon"),
     includeMarkdown("sobre.md")
   )
 )
@@ -202,7 +203,7 @@ library(shinycssloaders)
 library(shinydashboard)
 library(shinyjs)
 library(shinyWidgets)
-library(rmarkdown)
+library(markdown)
 # model
 library(tidymodels)
 library(janitor)
@@ -211,6 +212,7 @@ library(xgboost)
 library(ggplot2)
 library(iml)
 library(glmnet)
+library(partykit)
 
 # Dados exigidos ---------
 
