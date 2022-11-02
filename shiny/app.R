@@ -296,7 +296,8 @@ server <- function(input, output) {
         ggtitle("PDP") +
         theme_bw() + 
         scale_fill_viridis_c(option = "inferno") + 
-        scale_color_viridis_d(option = "inferno")
+        scale_color_viridis_d(option = "inferno") +
+        labs(fill = "%")
       
       if (muda_label) g <- g + scale_y_continuous("probabilidade de insulina predita") 
       
