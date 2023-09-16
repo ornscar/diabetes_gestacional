@@ -5,9 +5,7 @@ account: ornscar
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 4601020
-bundleId: 6464970
+bundleId: 7692373
 url: https://ornscar.shinyapps.io/interpretabilidade_obstetricia/
-when: 1667342930.96277
-lastSyncTime: 1667342930.96278
 asMultiple: FALSE
 asStatic: FALSE
