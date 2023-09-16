@@ -22,6 +22,8 @@ Interpreted XGBoost model - `script/interpret_models`
 
 `shiny/`
 
+<p align="center"><img src="shinyapp.png" width="650" height="400" /></p>
+
 ### Software
 
 R, 4.1.0 version, under IDE RStudio
