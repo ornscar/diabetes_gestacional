@@ -6,9 +6,9 @@ Cannot be published.
 
 ### Script
 
-Fitted predictive models - `script/fit_models`
+Fitted predictive models - `script/fit_models/`
 
-Interpreted XGBoost model - `script/interpret_models`
+Interpreted XGBoost model - `script/interpret_models/`
 
 ### Code outputs
 
