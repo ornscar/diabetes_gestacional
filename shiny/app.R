@@ -367,9 +367,12 @@ server <- function(input, output) {
       g <- plot(base_grafico) +
         ggtitle("PDP") +
         theme_bw() +
-        theme(strip.text.x = element_blank(),
-              text = element_text(size = 15),
-              legend.position = "bottom") +
+        theme(
+          strip.text.x = element_blank(),
+          text = element_text(size = 15),
+          legend.position = "bottom",
+          legend.key.width = unit(4, 'cm')
+        ) +
         scale_fill_viridis_c(option = "turbo", labels = percent) +
         scale_color_viridis_d(option = "turbo", labels = percent) +
         labs(fill = "")
