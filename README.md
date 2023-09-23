@@ -10,7 +10,7 @@ Fitted predictive models - `script/fit_models/`
 
 Interpreted XGBoost model - `script/interpret_models/`
 
-### Code outputs
+### Results
 
 `result/`
 
