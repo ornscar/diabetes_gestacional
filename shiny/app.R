@@ -18,7 +18,6 @@ library(iml)
 # graphs
 library(ggplot2)
 library(scales)
-library(paletteer)
 library(glmnet)
 library(partykit)
 
