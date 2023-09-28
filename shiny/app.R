@@ -18,6 +18,7 @@ library(iml)
 # graphs
 library(ggplot2)
 library(scales)
+library(paletteer)
 library(glmnet)
 library(partykit)
 
@@ -277,7 +278,9 @@ ui <- navbarPage(
 
 # dados de treino
 
-d_train <- readRDS("train_data.rds")
+d_train <- readRDS("train_data.rds") |> 
+  mutate(diabetes_gestacional = recode(diabetes_gestacional, nao = "não", sim = "sim"))
+
 X <- d_train[-10]
 y <- d_train$insulina
 
@@ -371,15 +374,15 @@ server <- function(input, output) {
               text = element_text(size = 15),
               legend.position = "bottom",
               legend.key.width = unit(4, 'cm')) +
-        scale_fill_viridis_c(option = "turbo", labels = percent) +
-        scale_color_viridis_d(option = "turbo", labels = percent) +
+        scale_fill_viridis_c(option = "inferno", labels = percent) +
+        scale_color_viridis_d(option = "inferno", labels = percent) +
         labs(fill = "")
       
       if (muda_label) g <- g + 
                            labs() +
                            scale_y_continuous("Probabilidade de insulina predita", labels = percent) +
-                           scale_fill_viridis_c(option = "turbo") +
-                           scale_color_viridis_d(option = "turbo") 
+                           scale_color_manual(values = c("#F1711FFF", "#71196EFF", "#000004FF")) +
+                           scale_fill_manual(values = c("#F1711FFF", "#71196EFF", "#000004FF"))
     }
     # ice
     else if (input$SelectMetGlobal == "ice") {
