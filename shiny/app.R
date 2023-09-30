@@ -124,7 +124,7 @@ ui <- navbarPage(
           mainPanel(
             width = 7,
             shinycssloaders::withSpinner(
-              plotOutput("Plot1", height = "580px"), 
+              plotOutput("Plot1", height = "600px"), 
               color = getOption("spinner.color", "#1E5AA0"), 
               type = getOption("spinner.type", 1)
             ),
@@ -214,13 +214,13 @@ ui <- navbarPage(
                 hr(),
                 shinyWidgets::materialSwitch(
                   inputId = "SwitchMacFetal", 
-                  label = tags$b("Macrossomia fetal:"), 
+                  label = tags$b("Macrossomia fetal:"),
                   status = "success"
                 ),
                 hr(),
                 shinyWidgets::materialSwitch(
                   inputId = "SwitchDiabGest", 
-                  label = tags$b("Antecedência de diabetes gestacional:"), 
+                  label = tags$b("Antecedência de diabetes gestacional:"),
                   status = "success"
                 ),
                 hr(),
@@ -481,8 +481,8 @@ server <- function(input, output) {
       
       categ_interesse <- unique(grafico$data$.path)
       
-      g <- grafico$data %>%
-        filter(.path != categ_interesse[2]) %>%
+      g <- grafico$data |> 
+        filter(.path != categ_interesse[2]) |> 
         ggplot() +
         theme_bw() +
         theme(text = element_text(size = 15)) +
