@@ -506,7 +506,7 @@ server <- function(input, output) {
           imc_classe = input$SelectIMC, 
           diabetes_familia = ifelse(input$SwitchDiabFam, "sim", "não"), 
           macrossomia_fetal = ifelse(input$SwitchMacFetal, "sim", "não"), 
-          diabetes_gestacional = ifelse(input$SwitchDiabGest, "sim", "nao"), 
+          diabetes_gestacional = ifelse(input$SwitchDiabGest, "sim", "não"), 
           tabagista = ifelse(input$SwitchTabagismo, "sim", "não"), 
           hipertensao = ifelse(input$SwitchHipertensao, "sim", "não"), 
           glicemia_jejum = input$KnobGlicemia
@@ -535,7 +535,7 @@ server <- function(input, output) {
           imc_classe = input$SelectIMC, 
           diabetes_familia = ifelse(input$SwitchDiabFam, "sim", "não"), 
           macrossomia_fetal = ifelse(input$SwitchMacFetal, "sim", "não"), 
-          diabetes_gestacional = ifelse(input$SwitchDiabGest, "sim", "nao"), 
+          diabetes_gestacional = ifelse(input$SwitchDiabGest, "sim", "não"), 
           tabagista = ifelse(input$SwitchTabagismo, "sim", "não"), 
           hipertensao = ifelse(input$SwitchHipertensao, "sim", "não"), 
           glicemia_jejum = input$KnobGlicemia
