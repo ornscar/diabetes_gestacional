@@ -18,6 +18,7 @@ library(iml)
 # graphs
 library(ggplot2)
 library(scales)
+library(paletteer)
 library(glmnet)
 library(partykit)
 
@@ -123,7 +124,7 @@ ui <- navbarPage(
           mainPanel(
             width = 7,
             shinycssloaders::withSpinner(
-              plotOutput("Plot1", height = "600px"), 
+              plotOutput("Plot1", height = "580px"), 
               color = getOption("spinner.color", "#1E5AA0"), 
               type = getOption("spinner.type", 1)
             ),
@@ -174,22 +175,22 @@ ui <- navbarPage(
                   label = "Idade (em anos):",
                   value = 16, min = 16, max = 47,
                   displayPrevious = TRUE, lineCap = "round", width = "60%",
-                  fgColor = "#000000", inputColor = "#000000"
+                  fgColor = "#1E5AA0", inputColor = "#4F4F4F"
                 ),
                 shinyWidgets::knobInput(
                   inputId = "KnobNGestacoes",
                   label = "N° de gestações:",
                   value = 1, min = 1, max = 10,
-                  displayPrevious = TRUE, 
-                  lineCap = "round", width = "60%",
-                  fgColor = "#000000", inputColor = "#000000"
+                  displayPrevious = FALSE, lineCap = "round", width = "60%",
+                  fgColor = "#1E5AA0", inputColor = "#4F4F4F"
                 ),
                 shinyWidgets::knobInput(
                   inputId = "KnobGlicemia",
                   label = "Valor do exame de glicemia de jejum (em mg/dL):",
                   value = 92, min = 92, max = 124,
                   displayPrevious = TRUE, lineCap = "round", width = "60%",
-                  fgColor = "#000000", inputColor = "#000000")
+                  fgColor = "#1E5AA0", inputColor = "#4F4F4F"
+                )
               ),
               column(
                 6,
@@ -427,10 +428,12 @@ server <- function(input, output) {
       )
       
       g <- plot(base_grafico) +
-        ggtitle("Importância das covariáveis") +
+        ggtitle("Importância das covariáveis por permutação") +
         theme_bw() + 
         scale_y_discrete("Covariável") + 
-        scale_x_continuous("Importância")
+        scale_x_continuous("Importância") +
+        theme(strip.text.x = element_blank(),
+              text = element_text(size = 15))
     }
     # feature total interaction
     else if (input$SelectMetGlobal == "int") {
