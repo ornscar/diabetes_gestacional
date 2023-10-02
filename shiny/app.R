@@ -11,14 +11,12 @@ library(shinyWidgets)
 library(markdown)
 # model
 library(tidymodels)
-library(janitor)
 library(xgboost)
 #interpretabilidade
 library(iml)
 # graphs
 library(ggplot2)
 library(scales)
-library(paletteer)
 library(glmnet)
 library(partykit)
 
@@ -36,7 +34,6 @@ ui <- navbarPage(
     tabPanel(
       "De interpretabilidade global", 
       fluidPage(
-        #theme = shinythemes::shinytheme("united"),
         titlePanel("Interpretabilidade Global"),
         hr(),
         sidebarLayout(
@@ -122,14 +119,15 @@ ui <- navbarPage(
           ),
           # tela de visualizacao 1 -----
           mainPanel(
+            align = "center",
             width = 7,
             shinycssloaders::withSpinner(
-              plotOutput("Plot1", height = "600px"), 
+              plotOutput("Plot1", height = "600px", width = "85%"), 
               color = getOption("spinner.color", "#1E5AA0"), 
               type = getOption("spinner.type", 1)
             ),
             hr(),
-            print("Desenvolvido por: Agatha Rodrigues e Ornella Scardua")
+            tags$p("Desenvolvido por: Agatha Rodrigues e Ornella Scardua", `align` = "left")
           )
         )
       )
@@ -138,7 +136,6 @@ ui <- navbarPage(
     tabPanel(
       "De interpretabilidade individual",
       fluidPage(
-        #theme = shinythemes::shinytheme("united"),
         titlePanel("Interpretabilidade Individual"),
         hr(),
         p(
@@ -248,7 +245,7 @@ ui <- navbarPage(
               type = getOption("spinner.type", 1)
             ),
             hr(),
-            print("Desenvolvido por: Agatha Rodrigues e Ornella Scardua")
+            tags$p("Desenvolvido por: Agatha Rodrigues e Ornella Scardua", `align` = "left")
           )
         )
       )
@@ -341,7 +338,7 @@ server <- function(input, output) {
       
       g <- plot(base_grafico) +
         ggtitle("PDP") +
-        scale_y_continuous("Probabilidade de insulina predita", labels = percent) +
+        scale_y_continuous("Probabilidade predita de usar insulina", labels = percent) +
         theme_bw() +
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
@@ -380,7 +377,7 @@ server <- function(input, output) {
       
       if (muda_label) g <- g + 
                            labs() +
-                           scale_y_continuous("Probabilidade de insulina predita", labels = percent) +
+                           scale_y_continuous("Probabilidade predita de usar insulina", labels = percent) +
                            scale_color_manual(values = c("#F1711FFF", "#71196EFF", "#000004FF")) +
                            scale_fill_manual(values = c("#F1711FFF", "#71196EFF", "#000004FF"))
     }
@@ -398,7 +395,7 @@ server <- function(input, output) {
       
       g <- plot(base_grafico) + 
         ggtitle("ICE") + 
-        scale_y_continuous("Probabilidade de insulina predita", labels = scales::percent) +
+        scale_y_continuous("Probabilidade predita de usar insulina", labels = scales::percent) +
         theme_bw() +
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
@@ -415,7 +412,7 @@ server <- function(input, output) {
       
       g <- base_grafico$plot() + 
         ggtitle("ALE") + 
-        scale_y_continuous("Diferença para a previsão média") +
+        scale_y_continuous("Diferença para a predição média") +
         theme_bw() +
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
