@@ -26,11 +26,11 @@ library(partykit)
 ui <- navbarPage(
   theme = "style.css",
   "INTERPRETABILIDADE EM MODELO PREDITIVO NA ÁREA DA MEDICINA OBSTÉTRICA",
-  # menu gráficos -----
+  ## menu gráficos -----
   navbarMenu(
     "Gráficos", 
     icon = icon("square-poll-horizontal"),
-    # painel de interpretabilidade global -----
+    ### painel de interpretabilidade global -----
     tabPanel(
       "De interpretabilidade global", 
       fluidPage(
@@ -117,7 +117,7 @@ ui <- navbarPage(
             shiny::conditionalPanel(condition = "input.SelectMetGlobal == 'imp' | input.SelectMetGlobal == 'int' | input.SelectMetGlobal == 'sub'"),
             tags$div(submitButton("Atualizar Filtro", icon = icon("arrows-rotate")), `align` = "center"),
           ),
-          # tela de visualizacao 1 -----
+          #### tela de visualizacao 1 -----
           mainPanel(
             align = "center",
             width = 7,
@@ -132,7 +132,7 @@ ui <- navbarPage(
         )
       )
     ),
-    # painel de interpretabilidade individual -----
+    ### painel de interpretabilidade individual -----
     tabPanel(
       "De interpretabilidade individual",
       fluidPage(
@@ -236,7 +236,7 @@ ui <- navbarPage(
             ),
             tags$div(submitButton("Atualizar Filtro", icon = icon("arrows-rotate")), `align` = "center"),
           ),
-          # tela de visualizacao 2 -----
+          #### tela de visualizacao 2 -----
           mainPanel(
             width = 7,
             shinycssloaders::withSpinner(
@@ -251,7 +251,7 @@ ui <- navbarPage(
       )
     )
   ),
-  # menu como interpretar -----
+  ## menu como interpretar -----
   navbarMenu(
     "Como Interpretar", icon = icon("question-sign", lib = "glyphicon"),
     tabPanel("Gráfico de Dependência Parcial (PDP)", includeMarkdown("md/pdp.md")), 
@@ -263,7 +263,7 @@ ui <- navbarPage(
     tabPanel("Modelo Interpretável Substituto Local (LIME)", includeMarkdown("md/lime.md")),
     tabPanel("Valores Shapley", includeMarkdown("md/shapley.md"))
   ),
-  # menu sobre -----
+  ## menu sobre -----
   tabPanel(
     "Sobre", icon = icon("info-sign", lib = "glyphicon"),
     includeMarkdown("md/sobre.md")
@@ -323,9 +323,9 @@ predictor_two <- Predictor$new(
 # Server -----------------
 
 server <- function(input, output) {
-  # graficos de interpretabilidade global ----
+  ## graficos de interpretabilidade global -----
   output$Plot1 <- renderPlot({
-    # pdp - 1 variavel
+    ### pdp - 1 variavel -----
     if (input$SelectMetGlobal == "pdp1") {
       base_grafico <- FeatureEffect$new(
         predictor = predictor_one,
@@ -343,7 +343,7 @@ server <- function(input, output) {
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
     }
-    # pdp - 2 variaveis
+    ## pdp - 2 variaveis -----
     else if (input$SelectMetGlobal == "pdp2") {
       base_grafico <- FeatureEffect$new(
         predictor = predictor_one,
@@ -381,7 +381,7 @@ server <- function(input, output) {
                            scale_color_manual(values = c("#F1711FFF", "#71196EFF", "#000004FF")) +
                            scale_fill_manual(values = c("#F1711FFF", "#71196EFF", "#000004FF"))
     }
-    # ice
+    ## ice -----
     else if (input$SelectMetGlobal == "ice") {
       base_grafico <- FeatureEffect$new(
         predictor = predictor_two,
@@ -400,7 +400,7 @@ server <- function(input, output) {
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
     }
-    # ale
+    ## ale -----
     else if (input$SelectMetGlobal == "ale") {
       base_grafico <- FeatureEffect$new(
         predictor = predictor_one,
@@ -417,7 +417,7 @@ server <- function(input, output) {
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
     }
-    # feature importance
+    ## feature importance -----
     else if (input$SelectMetGlobal == "imp") {
       base_grafico <- FeatureImp$new(
         predictor = predictor_one, 
@@ -432,7 +432,7 @@ server <- function(input, output) {
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
     }
-    # feature total interaction
+    ## feature total interaction -----
     else if (input$SelectMetGlobal == "int") {
       base_grafico <- Interaction$new(
         predictor_one
@@ -448,7 +448,7 @@ server <- function(input, output) {
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
     }
-    # feature 2-way interaction
+    ## feature 2-way interaction -----
     else if (input$SelectMetGlobal == "intbi") {
       base_grafico <- Interaction$new(
         predictor_one,
@@ -465,7 +465,7 @@ server <- function(input, output) {
         theme(strip.text.x = element_blank(),
               text = element_text(size = 15))
     }
-    # global surrogate
+    ## global surrogate -----
     else if (input$SelectMetGlobal == "sub") {
       base_grafico <- TreeSurrogate$new(
         predictor_one, 
@@ -490,9 +490,9 @@ server <- function(input, output) {
     }
     g
   })
-  # graficos de interpretabilidade individual ----
+  ## graficos de interpretabilidade individual ----
   output$Plot2 <- renderPlot({
-    # lime
+    ### lime -----
     if (input$SelectMetIndividual == "lime") {
       base_grafico <- LocalModel$new(
         predictor_two, 
@@ -522,7 +522,7 @@ server <- function(input, output) {
               text = element_text(size = 15))
       
     }
-    # shapley values
+    ## shapley values -----
     else if (input$SelectMetIndividual == "shapley") {
       base_grafico <- Shapley$new(
         predictor_one, 
