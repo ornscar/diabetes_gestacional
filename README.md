@@ -1,5 +1,9 @@
 # Scientific Iniciation - Interpretability in predictive models in the health field
 
+This project aims to discuss predictive models and interpretability methods in the health field as result of a real application in the obstetric medicine area. Thus, it's expected to predict whether a pregnant diagnosed with gestational diabetes will use insulin previous at one moment to birth and to explain the reason why such outcome occured.
+
+Therefore, the first step was evaluate the performance of each model in terms of prediction, and the second, to interpret the one which accuracy was greatest, in this case, the XGBoost model.
+
 ### Data
 
 Cannot be published.
@@ -27,7 +31,3 @@ Interpreted XGBoost model - `script/interpret_models/`
 ### Software
 
 R, 4.1.0 version, under IDE RStudio
-
-This project aims to discuss predictive models and interpretability methods in the health field as result of a real application in the obstetric medicine area. Thus, it's expected to predict whether a pregnant diagnosed with gestational diabetes will use insulin previous at one moment to birth and to explain the reason why such outcome occured.
-
-Therefore, the first step was evaluate the performance of each model in terms of prediction, and the second, to interpret the one which accuracy was greatest, in this case, the XGBoost model.
